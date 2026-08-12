@@ -23,30 +23,30 @@ window.addEventListener("load", () => {
     duration: 0.6,
     ease: "power4.inOut"
   })
-  .to(".loader-text", {
-    opacity: 0,
-    y: -20,
-    duration: 0.3,
-    ease: "power2.out"
-  }, "-=0.5")
-  .to(".loader-bar-track", {
-    opacity: 0,
-    duration: 0.2,
-    ease: "power2.out"
-  }, "-=0.4")
-  .to("#loader", {
-    opacity: 0,
-    duration: 0.4,
-    ease: "power2.out",
-    onStart: () => {
-      loader.style.pointerEvents = "none";
-    },
-    onComplete: () => {
-      loader.remove();
-      // Trigger hero entrance animations after loader
-      animateHeroEntrance();
-    }
-  });
+    .to(".loader-text", {
+      opacity: 0,
+      y: -20,
+      duration: 0.3,
+      ease: "power2.out"
+    }, "-=0.5")
+    .to(".loader-bar-track", {
+      opacity: 0,
+      duration: 0.2,
+      ease: "power2.out"
+    }, "-=0.4")
+    .to("#loader", {
+      opacity: 0,
+      duration: 0.4,
+      ease: "power2.out",
+      onStart: () => {
+        loader.style.pointerEvents = "none";
+      },
+      onComplete: () => {
+        loader.remove();
+        // Trigger hero entrance animations after loader
+        animateHeroEntrance();
+      }
+    });
 });
 
 // ══════════════════════════════════════
@@ -88,41 +88,41 @@ function animateHeroEntrance() {
     duration: 1,
     ease: "power3.out"
   })
-  // Status badge
-  .from("#heroStatusBadge", {
-    y: -30,
-    opacity: 0,
-    duration: 0.8,
-    ease: "power3.out"
-  }, "-=0.6")
-  // Signature draw-on
-  .to(".signature-text", {
-    strokeDashoffset: 0,
-    duration: 2.5,
-    ease: "power2.inOut"
-  }, "-=0.8")
-  // Bottom meta
-  .from("#heroBottomMeta", {
-    y: 30,
-    opacity: 0,
-    duration: 0.8,
-    ease: "power3.out"
-  }, "-=2")
-  // Scroll indicator
-  .from("#heroScrollIndicator", {
-    opacity: 0,
-    y: 20,
-    duration: 0.6,
-    ease: "power3.out"
-  }, "-=1.5")
-  // Wave layers fade in
-  .from(".wave-layer", {
-    opacity: 0,
-    scale: 1.1,
-    duration: 1.5,
-    ease: "power2.out",
-    stagger: 0.2
-  }, "-=2.5");
+    // Status badge
+    .from("#heroStatusBadge", {
+      y: -30,
+      opacity: 0,
+      duration: 0.8,
+      ease: "power3.out"
+    }, "-=0.6")
+    // Signature draw-on
+    .to(".signature-text", {
+      strokeDashoffset: 0,
+      duration: 2.5,
+      ease: "power2.inOut"
+    }, "-=0.8")
+    // Bottom meta
+    .from("#heroBottomMeta", {
+      y: 30,
+      opacity: 0,
+      duration: 0.8,
+      ease: "power3.out"
+    }, "-=2")
+    // Scroll indicator
+    .from("#heroScrollIndicator", {
+      opacity: 0,
+      y: 20,
+      duration: 0.6,
+      ease: "power3.out"
+    }, "-=1.5")
+    // Wave layers fade in
+    .from(".wave-layer", {
+      opacity: 0,
+      scale: 1.1,
+      duration: 1.5,
+      ease: "power2.out",
+      stagger: 0.2
+    }, "-=2.5");
 
   // Show nav after hero entrance
   gsap.to("#mainNav", {
