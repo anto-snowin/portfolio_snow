@@ -23,30 +23,30 @@ window.addEventListener("load", () => {
     duration: 0.6,
     ease: "power4.inOut"
   })
-    .to(".loader-text", {
-      opacity: 0,
-      y: -20,
-      duration: 0.3,
-      ease: "power2.out"
-    }, "-=0.5")
-    .to(".loader-bar-track", {
-      opacity: 0,
-      duration: 0.2,
-      ease: "power2.out"
-    }, "-=0.4")
-    .to("#loader", {
-      opacity: 0,
-      duration: 0.4,
-      ease: "power2.out",
-      onStart: () => {
-        loader.style.pointerEvents = "none";
-      },
-      onComplete: () => {
-        loader.remove();
-        // Trigger hero entrance animations after loader
-        animateHeroEntrance();
-      }
-    });
+  .to(".loader-text", {
+    opacity: 0,
+    y: -20,
+    duration: 0.3,
+    ease: "power2.out"
+  }, "-=0.5")
+  .to(".loader-bar-track", {
+    opacity: 0,
+    duration: 0.2,
+    ease: "power2.out"
+  }, "-=0.4")
+  .to("#loader", {
+    opacity: 0,
+    duration: 0.4,
+    ease: "power2.out",
+    onStart: () => {
+      loader.style.pointerEvents = "none";
+    },
+    onComplete: () => {
+      loader.remove();
+      // Trigger hero entrance animations after loader
+      animateHeroEntrance();
+    }
+  });
 });
 
 // ══════════════════════════════════════
@@ -88,41 +88,41 @@ function animateHeroEntrance() {
     duration: 1,
     ease: "power3.out"
   })
-    // Status badge
-    .from("#heroStatusBadge", {
-      y: -30,
-      opacity: 0,
-      duration: 0.8,
-      ease: "power3.out"
-    }, "-=0.6")
-    // Signature draw-on
-    .to(".signature-text", {
-      strokeDashoffset: 0,
-      duration: 2.5,
-      ease: "power2.inOut"
-    }, "-=0.8")
-    // Bottom meta
-    .from("#heroBottomMeta", {
-      y: 30,
-      opacity: 0,
-      duration: 0.8,
-      ease: "power3.out"
-    }, "-=2")
-    // Scroll indicator
-    .from("#heroScrollIndicator", {
-      opacity: 0,
-      y: 20,
-      duration: 0.6,
-      ease: "power3.out"
-    }, "-=1.5")
-    // Wave layers fade in
-    .from(".wave-layer", {
-      opacity: 0,
-      scale: 1.1,
-      duration: 1.5,
-      ease: "power2.out",
-      stagger: 0.2
-    }, "-=2.5");
+  // Status badge
+  .from("#heroStatusBadge", {
+    y: -30,
+    opacity: 0,
+    duration: 0.8,
+    ease: "power3.out"
+  }, "-=0.6")
+  // Signature draw-on
+  .to(".signature-text", {
+    strokeDashoffset: 0,
+    duration: 2.5,
+    ease: "power2.inOut"
+  }, "-=0.8")
+  // Bottom meta
+  .from("#heroBottomMeta", {
+    y: 30,
+    opacity: 0,
+    duration: 0.8,
+    ease: "power3.out"
+  }, "-=2")
+  // Scroll indicator
+  .from("#heroScrollIndicator", {
+    opacity: 0,
+    y: 20,
+    duration: 0.6,
+    ease: "power3.out"
+  }, "-=1.5")
+  // Wave layers fade in
+  .from(".wave-layer", {
+    opacity: 0,
+    scale: 1.1,
+    duration: 1.5,
+    ease: "power2.out",
+    stagger: 0.2
+  }, "-=2.5");
 
   // Show nav after hero entrance
   gsap.to("#mainNav", {
@@ -138,114 +138,81 @@ function animateHeroEntrance() {
 gsap.set("#mainNav", { opacity: 0, y: -30 });
 
 // ══════════════════════════════════════
-// HERO SCROLL-SHRINK TRANSITION
-// (veishnu.me style: hero shrinks with
-//  rounded corners as you scroll down,
-//  revealing dark bg behind it)
+// ALL SECTIONS CARD-SHRINK TRANSITION
+// (veishnu.me style card stacking effect for EVERY section)
 // ══════════════════════════════════════
-(function initHeroShrink() {
-  const wrapper = document.getElementById('heroScrollWrapper');
-  const hero = document.getElementById('heroSection');
-  if (!wrapper || !hero) return;
+(function initAllSectionTransitions() {
+  const wrappers = gsap.utils.toArray('.page-section-wrapper');
 
-  // The hero shrinks, gets rounded corners, and scales down
-  gsap.to(hero, {
-    scale: 0.88,
-    borderRadius: "28px",
-    scrollTrigger: {
-      trigger: wrapper,
-      start: "top top",
-      end: "bottom top",
-      scrub: 0.5,
-      pin: false,
+  wrappers.forEach((wrapper, index) => {
+    const section = wrapper.querySelector('.page-section');
+    if (!section) return;
+
+    // Apply shrink & stack effect to every section except the last
+    if (index < wrappers.length - 1) {
+      gsap.to(section, {
+        scale: 0.88,
+        borderRadius: "28px",
+        opacity: 0.35,
+        scrollTrigger: {
+          trigger: wrapper,
+          start: "top top",
+          end: "bottom top",
+          scrub: 0.5,
+          pin: false,
+        }
+      });
+
+      // Fade out inner elements slightly as card shrinks
+      const innerContent = section.querySelectorAll('.section-inner, #heroTopText, #heroStatusBadge, .hero-signature, #heroBottomMeta, #heroScrollIndicator');
+      if (innerContent.length) {
+        gsap.to(innerContent, {
+          y: -40,
+          opacity: 0,
+          scrollTrigger: {
+            trigger: wrapper,
+            start: "15% top",
+            end: "75% top",
+            scrub: 0.3,
+          }
+        });
+      }
     }
   });
 
-  // Fade out hero content elements as you scroll
-  gsap.to("#heroTopText", {
-    y: -80,
-    opacity: 0,
-    scrollTrigger: {
-      trigger: wrapper,
-      start: "5% top",
-      end: "35% top",
-      scrub: 0.3,
-    }
-  });
+  // Parallax wave layers in hero section
+  const heroWrapper = document.getElementById('heroScrollWrapper');
+  if (heroWrapper) {
+    gsap.to(".wave-layer-1", {
+      y: -60,
+      scrollTrigger: {
+        trigger: heroWrapper,
+        start: "top top",
+        end: "bottom top",
+        scrub: 0.5,
+      }
+    });
 
-  gsap.to("#heroStatusBadge", {
-    y: -50,
-    opacity: 0,
-    scrollTrigger: {
-      trigger: wrapper,
-      start: "5% top",
-      end: "30% top",
-      scrub: 0.3,
-    }
-  });
+    gsap.to(".wave-layer-2", {
+      y: -100,
+      scrollTrigger: {
+        trigger: heroWrapper,
+        start: "top top",
+        end: "bottom top",
+        scrub: 0.5,
+      }
+    });
 
-  gsap.to(".hero-signature", {
-    opacity: 0,
-    scale: 1.15,
-    scrollTrigger: {
-      trigger: wrapper,
-      start: "10% top",
-      end: "40% top",
-      scrub: 0.3,
-    }
-  });
-
-  gsap.to("#heroBottomMeta", {
-    y: 40,
-    opacity: 0,
-    scrollTrigger: {
-      trigger: wrapper,
-      start: "5% top",
-      end: "25% top",
-      scrub: 0.3,
-    }
-  });
-
-  gsap.to("#heroScrollIndicator", {
-    opacity: 0,
-    scrollTrigger: {
-      trigger: wrapper,
-      start: "2% top",
-      end: "10% top",
-      scrub: 0.3,
-    }
-  });
-
-  // Wave layers parallax
-  gsap.to(".wave-layer-1", {
-    y: -60,
-    scrollTrigger: {
-      trigger: wrapper,
-      start: "top top",
-      end: "bottom top",
-      scrub: 0.5,
-    }
-  });
-
-  gsap.to(".wave-layer-2", {
-    y: -100,
-    scrollTrigger: {
-      trigger: wrapper,
-      start: "top top",
-      end: "bottom top",
-      scrub: 0.5,
-    }
-  });
-
-  gsap.to(".wave-layer-3", {
-    y: -140,
-    scrollTrigger: {
-      trigger: wrapper,
-      start: "top top",
-      end: "bottom top",
-      scrub: 0.5,
-    }
-  });
+    gsap.to(".wave-layer-3", {
+      y: -140,
+      scrollTrigger: {
+        trigger: heroWrapper,
+        start: "top top",
+        end: "bottom top",
+        scrub: 0.5,
+      }
+    });
+  }
 })();
 
 // ══════════════════════════════════════
@@ -290,19 +257,27 @@ window.addEventListener('scroll', () => {
 
   links.forEach(a => {
     a.addEventListener('mouseenter', () => movePill(a.parentElement));
+    a.addEventListener('click', (e) => {
+      e.preventDefault();
+      const targetId = a.getAttribute('href');
+      const targetEl = document.querySelector(targetId);
+      if (targetEl) {
+        lenis.scrollTo(targetEl, { duration: 1.2 });
+      }
+    });
   });
 
   track.addEventListener('mouseleave', () => {
     cursor.style.opacity = '0';
   });
 
-  // highlight active section link on scroll
-  const sections = ['about', 'skills', 'projects', 'contact'];
+  // Highlight active section link on scroll
+  const sectionIds = ['aboutScrollWrapper', 'skillsScrollWrapper', 'projectsScrollWrapper', 'contactScrollWrapper'];
   window.addEventListener('scroll', () => {
     let current = '';
-    sections.forEach(id => {
+    sectionIds.forEach(id => {
       const el = document.getElementById(id);
-      if (el && window.scrollY >= el.offsetTop - 140) current = id;
+      if (el && window.scrollY >= el.offsetTop - 300) current = id;
     });
     links.forEach(a => {
       a.style.color = a.getAttribute('href') === '#' + current
@@ -701,7 +676,7 @@ revealEls.forEach(el => revealIO.observe(el));
       });
     }, { threshold: 0.12 });
 
-    entryIO.observe(document.getElementById('projects'));
+    entryIO.observe(document.getElementById('projectsScrollWrapper') || document.getElementById('projects'));
   })();
 })();
 

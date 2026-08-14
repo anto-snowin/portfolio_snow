@@ -38,10 +38,10 @@
 
   <!-- Mobile Nav -->
   <div class="mobile-nav" id="mobileNav">
-    <a href="#about" onclick="closeMobileNav()">About</a>
-    <a href="#skills" onclick="closeMobileNav()">Skills</a>
-    <a href="#projects" onclick="closeMobileNav()">Projects</a>
-    <a href="#contact" onclick="closeMobileNav()">Contact</a>
+    <a href="#aboutScrollWrapper" onclick="closeMobileNav()">About</a>
+    <a href="#skillsScrollWrapper" onclick="closeMobileNav()">Skills</a>
+    <a href="#projectsScrollWrapper" onclick="closeMobileNav()">Projects</a>
+    <a href="#contactScrollWrapper" onclick="closeMobileNav()">Contact</a>
   </div>
 
   <!-- Navigation -->
@@ -51,283 +51,303 @@
     <!-- Animated pill nav -->
     <ul class="nav-pill-track" id="navPillTrack">
       <div class="nav-pill-cursor" id="navPillCursor"></div>
-      <li><a href="#about">About</a></li>
-      <li><a href="#skills">Skills</a></li>
-      <li><a href="#projects">Projects</a></li>
-      <li><a href="#contact">Contact</a></li>
+      <li><a href="#aboutScrollWrapper">About</a></li>
+      <li><a href="#skillsScrollWrapper">Skills</a></li>
+      <li><a href="#projectsScrollWrapper">Projects</a></li>
+      <li><a href="#contactScrollWrapper">Contact</a></li>
     </ul>
 
-    <a href="#contact" class="nav-cta">Hire me</a>
+    <a href="#contactScrollWrapper" class="nav-cta">Hire me</a>
     <button class="nav-hamburger" id="hamburger" aria-label="Menu">
       <span></span><span></span><span></span>
     </button>
   </nav>
 
-  <!-- ═══ HERO SECTION (veishnu-inspired) ═══ -->
-  <div class="hero-scroll-wrapper" id="heroScrollWrapper">
-    <section class="hero" id="heroSection">
+  <!-- ═══ MAIN PAGE STACK ═══ -->
+  <main class="page-container">
 
-      <!-- Animated SVG wave background -->
-      <div class="hero-bg-waves">
-        <svg class="wave-layer wave-layer-1" viewBox="0 0 1200 800" preserveAspectRatio="none">
-          <path d="M0 70 C140 200, 360 -60, 640 120 S980 300, 1200 80" />
-          <path d="M0 190 C100 320, 520 -100, 760 220 S1000 380, 1200 210" />
-          <path d="M0 350 C260 -120, 480 420, 820 260 S960 100, 1200 300" />
-          <path d="M0 500 C180 700, 600 -80, 780 540 S1100 400, 1200 560" />
-          <path d="M0 650 C320 400, 700 800, 900 600 S1100 500, 1200 700" />
-        </svg>
-        <svg class="wave-layer wave-layer-2" viewBox="0 0 1200 800" preserveAspectRatio="none">
-          <path d="M0 130 C300 -40, 420 320, 700 140 S900 260, 1200 200" />
-          <path d="M0 310 C180 500, 600 -80, 780 340 S1100 200, 1200 360" />
-          <path d="M0 490 C400 -80, 520 720, 900 500 S950 200, 1200 540" />
-          <path d="M0 600 C200 750, 700 350, 900 650 S1050 500, 1200 640" />
-        </svg>
-        <svg class="wave-layer wave-layer-3" viewBox="0 0 1200 800" preserveAspectRatio="none">
-          <path d="M0 250 C260 -120, 480 420, 820 260 S960 100, 1200 300" />
-          <path d="M0 430 C200 650, 700 -120, 820 460 S1080 300, 1200 480" />
-          <path d="M0 550 C120 800, 650 -100, 820 580 S1100 350, 1200 600" />
-          <path d="M0 730 C420 -100, 600 950, 980 740 S1050 300, 1200 780" />
-        </svg>
-      </div>
+    <!-- ═══ SECTION 1: HERO (veishnu-inspired) ═══ -->
+    <div class="page-section-wrapper" id="heroScrollWrapper">
+      <section class="page-section hero-section" id="heroSection">
 
-      <!-- Gradient overlay for depth -->
-      <div class="hero-gradient-overlay"></div>
-
-      <!-- Hero Name / Title (top-left like reference) -->
-      <div class="hero-top-text" id="heroTopText">
-        <h1 class="hero-name-new">ANTO<br>SNOWIN</h1>
-        <p class="hero-subtitle-new">Software Engineer</p>
-      </div>
-
-      <!-- SVG Signature overlay in center -->
-      <div class="hero-signature" id="heroSignature">
-        <svg viewBox="0 0 600 200" class="signature-svg">
-          <text x="50%" y="50%" dominant-baseline="central" text-anchor="middle"
-                class="signature-text">anto snowin</text>
-        </svg>
-      </div>
-
-      <!-- Scroll indicator -->
-      <div class="hero-scroll-indicator" id="heroScrollIndicator">
-        <div class="scroll-line"></div>
-        <span>Scroll</span>
-      </div>
-
-      <!-- Bottom meta -->
-      <div class="hero-bottom-meta" id="heroBottomMeta">
-        <div class="meta-item">
-          <span class="meta-label">Role</span>
-          <span class="meta-value">Aspiring Software Engineer</span>
+        <!-- Animated SVG wave background -->
+        <div class="hero-bg-waves">
+          <svg class="wave-layer wave-layer-1" viewBox="0 0 1200 800" preserveAspectRatio="none">
+            <path d="M0 70 C140 200, 360 -60, 640 120 S980 300, 1200 80" />
+            <path d="M0 190 C100 320, 520 -100, 760 220 S1000 380, 1200 210" />
+            <path d="M0 350 C260 -120, 480 420, 820 260 S960 100, 1200 300" />
+            <path d="M0 500 C180 700, 600 -80, 780 540 S1100 400, 1200 560" />
+            <path d="M0 650 C320 400, 700 800, 900 600 S1100 500, 1200 700" />
+          </svg>
+          <svg class="wave-layer wave-layer-2" viewBox="0 0 1200 800" preserveAspectRatio="none">
+            <path d="M0 130 C300 -40, 420 320, 700 140 S900 260, 1200 200" />
+            <path d="M0 310 C180 500, 600 -80, 780 340 S1100 200, 1200 360" />
+            <path d="M0 490 C400 -80, 520 720, 900 500 S950 200, 1200 540" />
+            <path d="M0 600 C200 750, 700 350, 900 650 S1050 500, 1200 640" />
+          </svg>
+          <svg class="wave-layer wave-layer-3" viewBox="0 0 1200 800" preserveAspectRatio="none">
+            <path d="M0 250 C260 -120, 480 420, 820 260 S960 100, 1200 300" />
+            <path d="M0 430 C200 650, 700 -120, 820 460 S1080 300, 1200 480" />
+            <path d="M0 550 C120 800, 650 -100, 820 580 S1100 350, 1200 600" />
+            <path d="M0 730 C420 -100, 600 950, 980 740 S1050 300, 1200 780" />
+          </svg>
         </div>
-        <div class="meta-divider"></div>
-        <div class="meta-item">
-          <span class="meta-label">Focus</span>
-          <span class="meta-value">AI · ML · Web Dev</span>
+
+        <!-- Gradient overlay for depth -->
+        <div class="hero-gradient-overlay"></div>
+
+        <!-- Hero Name / Title (top-left like reference) -->
+        <div class="hero-top-text" id="heroTopText">
+          <h1 class="hero-name-new">ANTO<br>SNOWIN</h1>
+          <p class="hero-subtitle-new">Software Engineer</p>
         </div>
-        <div class="meta-divider"></div>
-        <div class="meta-item">
-          <span class="meta-label">Location</span>
-          <span class="meta-value">Chennai, IN</span>
+
+        <!-- SVG Signature overlay in center -->
+        <div class="hero-signature" id="heroSignature">
+          <svg viewBox="0 0 600 200" class="signature-svg">
+            <text x="50%" y="50%" dominant-baseline="central" text-anchor="middle"
+                  class="signature-text">anto snowin</text>
+          </svg>
         </div>
-      </div>
 
-      <!-- Status badge -->
-      <div class="hero-status-badge" id="heroStatusBadge">
-        <div class="status-dot-new"></div>
-        <span>Available for work</span>
-      </div>
+        <!-- Scroll indicator -->
+        <div class="hero-scroll-indicator" id="heroScrollIndicator">
+          <div class="scroll-line"></div>
+          <span>Scroll</span>
+        </div>
 
-    </section>
-  </div>
+        <!-- Bottom meta -->
+        <div class="hero-bottom-meta" id="heroBottomMeta">
+          <div class="meta-item">
+            <span class="meta-label">Role</span>
+            <span class="meta-value">Aspiring Software Engineer</span>
+          </div>
+          <div class="meta-divider"></div>
+          <div class="meta-item">
+            <span class="meta-label">Focus</span>
+            <span class="meta-value">AI · ML · Web Dev</span>
+          </div>
+          <div class="meta-divider"></div>
+          <div class="meta-item">
+            <span class="meta-label">Location</span>
+            <span class="meta-value">Chennai, IN</span>
+          </div>
+        </div>
 
-  <!-- About -->
-  <section id="about">
-    <div class="section-label reveal">
-      <span class="num">01</span>
-      <span class="title">About</span>
+        <!-- Status badge -->
+        <div class="hero-status-badge" id="heroStatusBadge">
+          <div class="status-dot-new"></div>
+          <span>Available for work</span>
+        </div>
+
+      </section>
     </div>
-    <div class="about-grid">
-      <div class="about-bio reveal">
-        I'm a <span class="highlight">Computer Science student</span> who builds things that live on the internet —
-        from lean backends to pixel-precise interfaces.
-        <span class="dim"> Curious across the entire stack; driven by clean code and meaningful problems.</span>
-      </div>
-      <div class="about-details reveal reveal-delay-2">
-        <div class="detail-row">
-          <span class="detail-key">Location</span>
-          <span class="detail-val">Chennai, India</span>
-        </div>
-        <div class="detail-row">
-          <span class="detail-key">Degree</span>
-          <span class="detail-val">B.E. Computer Science &amp; Engineering</span>
-        </div>
-        <div class="detail-row">
-          <span class="detail-key">Focus</span>
-          <span class="detail-val">AI, Machine Learning &amp; Data Science</span>
-        </div>
-        <div class="detail-row">
-          <span class="detail-key">Interests</span>
-          <span class="detail-val">Cloud, Open Source, Dev Tools</span>
-        </div>
-        <div class="detail-row">
-          <span class="detail-key">Status</span>
-          <span class="detail-val" style="color:var(--green);">Open to opportunities</span>
-        </div>
-      </div>
-    </div>
-  </section>
 
-  <!-- Skills -->
-  <section id="skills">
-    <div class="section-label reveal">
-      <span class="num">02</span>
-      <span class="title">Skills &amp; Stack</span>
+    <!-- ═══ SECTION 2: ABOUT ═══ -->
+    <div class="page-section-wrapper" id="aboutScrollWrapper">
+      <section class="page-section about-section" id="about">
+        <div class="section-inner">
+          <div class="section-label reveal">
+            <span class="num">01</span>
+            <span class="title">About</span>
+          </div>
+          <div class="about-grid">
+            <div class="about-bio reveal">
+              I'm a <span class="highlight">Computer Science student</span> who builds things that live on the internet —
+              from lean backends to pixel-precise interfaces.
+              <span class="dim"> Curious across the entire stack; driven by clean code and meaningful problems.</span>
+            </div>
+            <div class="about-details reveal reveal-delay-2">
+              <div class="detail-row">
+                <span class="detail-key">Location</span>
+                <span class="detail-val">Chennai, India</span>
+              </div>
+              <div class="detail-row">
+                <span class="detail-key">Degree</span>
+                <span class="detail-val">B.E. Computer Science &amp; Engineering</span>
+              </div>
+              <div class="detail-row">
+                <span class="detail-key">Focus</span>
+                <span class="detail-val">AI, Machine Learning &amp; Data Science</span>
+              </div>
+              <div class="detail-row">
+                <span class="detail-key">Interests</span>
+                <span class="detail-val">Cloud, Open Source, Dev Tools</span>
+              </div>
+              <div class="detail-row">
+                <span class="detail-key">Status</span>
+                <span class="detail-val" style="color:var(--green);">Open to opportunities</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
-    <div class="skills-layout">
-      <div class="orbit-container reveal" id="orbitContainer">
-        <div class="orbit-center">ANTO<br>SNOWIN</div>
-      </div>
-      <div class="skill-cards">
-        <div class="skill-category reveal reveal-delay-1">
-          <div class="skill-cat-header">
-            <span class="skill-cat-icon">[ 01 ]</span>
-            <span class="skill-cat-name">Languages</span>
-          </div>
-          <div class="skill-tags">
-            <span class="tag">Python</span>
-            <span class="tag">JavaScript</span>
-            <span class="tag">TypeScript</span>
-            <span class="tag">Java</span>
-            <span class="tag">C</span>
-            <span class="tag">C++</span>
-          </div>
-        </div>
-        <div class="skill-category reveal reveal-delay-2">
-          <div class="skill-cat-header">
-            <span class="skill-cat-icon">[ 02 ]</span>
-            <span class="skill-cat-name">Frontend</span>
-          </div>
-          <div class="skill-tags">
-            <span class="tag">React</span>
-            <span class="tag">Next.js</span>
-            <span class="tag">HTML</span>
-            <span class="tag">CSS</span>
-            <span class="tag">Tailwind</span>
-          </div>
-        </div>
-        <div class="skill-category reveal reveal-delay-3">
-          <div class="skill-cat-header">
-            <span class="skill-cat-icon">[ 03 ]</span>
-            <span class="skill-cat-name">Tools &amp; Systems</span>
-          </div>
-          <div class="skill-tags">
-            <span class="tag">Git</span>
-            <span class="tag">GitHub</span>
-            <span class="tag">Docker</span>
-            <span class="tag">Linux</span>
-            <span class="tag">SQL</span>
-            <span class="tag">PostgreSQL</span>
-            <span class="tag">Node.js</span>
-          </div>
-        </div>
 
-        <div class="skill-category reveal reveal-delay-1">
-          <div class="skill-cat-header">
-            <span class="skill-cat-icon">[ 04 ]</span>
-            <span class="skill-cat-name">Backend</span>
+    <!-- ═══ SECTION 3: SKILLS ═══ -->
+    <div class="page-section-wrapper" id="skillsScrollWrapper">
+      <section class="page-section skills-section" id="skills">
+        <div class="section-inner">
+          <div class="section-label reveal">
+            <span class="num">02</span>
+            <span class="title">Skills &amp; Stack</span>
           </div>
-          <div class="skill-tags">
-            <span class="tag">Python</span>
-            <span class="tag">Flask</span>
-            <span class="tag">Django</span>
-            <span class="tag">FastAPI</span>
-            <span class="tag">Node.js</span>
-            <span class="tag">Express.js</span>
-            <span class="tag">REST API</span>
-            <span class="tag">JWT Auth</span>
-          </div>
-        </div>
+          <div class="skills-layout">
+            <div class="orbit-container reveal" id="orbitContainer">
+              <div class="orbit-center">ANTO<br>SNOWIN</div>
+            </div>
+            <div class="skill-cards">
+              <div class="skill-category reveal reveal-delay-1">
+                <div class="skill-cat-header">
+                  <span class="skill-cat-icon">[ 01 ]</span>
+                  <span class="skill-cat-name">Languages</span>
+                </div>
+                <div class="skill-tags">
+                  <span class="tag">Python</span>
+                  <span class="tag">JavaScript</span>
+                  <span class="tag">TypeScript</span>
+                  <span class="tag">Java</span>
+                  <span class="tag">C</span>
+                  <span class="tag">C++</span>
+                </div>
+              </div>
+              <div class="skill-category reveal reveal-delay-2">
+                <div class="skill-cat-header">
+                  <span class="skill-cat-icon">[ 02 ]</span>
+                  <span class="skill-cat-name">Frontend</span>
+                </div>
+                <div class="skill-tags">
+                  <span class="tag">React</span>
+                  <span class="tag">Next.js</span>
+                  <span class="tag">HTML</span>
+                  <span class="tag">CSS</span>
+                  <span class="tag">Tailwind</span>
+                </div>
+              </div>
+              <div class="skill-category reveal reveal-delay-3">
+                <div class="skill-cat-header">
+                  <span class="skill-cat-icon">[ 03 ]</span>
+                  <span class="skill-cat-name">Tools &amp; Systems</span>
+                </div>
+                <div class="skill-tags">
+                  <span class="tag">Git</span>
+                  <span class="tag">GitHub</span>
+                  <span class="tag">Docker</span>
+                  <span class="tag">Linux</span>
+                  <span class="tag">SQL</span>
+                  <span class="tag">PostgreSQL</span>
+                  <span class="tag">Node.js</span>
+                </div>
+              </div>
 
-        <div class="skill-category reveal reveal-delay-2">
-          <div class="skill-cat-header">
-            <span class="skill-cat-icon">[ 05 ]</span>
-            <span class="skill-cat-name">Databases</span>
-          </div>
-          <div class="skill-tags">
-            <span class="tag">MySQL</span>
-            <span class="tag">PostgreSQL</span>
-            <span class="tag">MongoDB</span>
-            <span class="tag">SQLite</span>
-            <span class="tag">Firebase</span>
-          </div>
-        </div>
+              <div class="skill-category reveal reveal-delay-1">
+                <div class="skill-cat-header">
+                  <span class="skill-cat-icon">[ 04 ]</span>
+                  <span class="skill-cat-name">Backend</span>
+                </div>
+                <div class="skill-tags">
+                  <span class="tag">Python</span>
+                  <span class="tag">Flask</span>
+                  <span class="tag">Django</span>
+                  <span class="tag">FastAPI</span>
+                  <span class="tag">Node.js</span>
+                  <span class="tag">Express.js</span>
+                  <span class="tag">REST API</span>
+                  <span class="tag">JWT Auth</span>
+                </div>
+              </div>
 
-        <div class="skill-category reveal reveal-delay-3">
-          <div class="skill-cat-header">
-            <span class="skill-cat-icon">[ 06 ]</span>
-            <span class="skill-cat-name">Data &amp; AI</span>
-          </div>
-          <div class="skill-tags">
-            <span class="tag">Pandas</span>
-            <span class="tag">NumPy</span>
-            <span class="tag">Scikit-learn</span>
-            <span class="tag">Tableau</span>
-            <span class="tag">Power BI</span>
-            <span class="tag">Matplotlib</span>
+              <div class="skill-category reveal reveal-delay-2">
+                <div class="skill-cat-header">
+                  <span class="skill-cat-icon">[ 05 ]</span>
+                  <span class="skill-cat-name">Databases</span>
+                </div>
+                <div class="skill-tags">
+                  <span class="tag">MySQL</span>
+                  <span class="tag">PostgreSQL</span>
+                  <span class="tag">MongoDB</span>
+                  <span class="tag">SQLite</span>
+                  <span class="tag">Firebase</span>
+                </div>
+              </div>
+
+              <div class="skill-category reveal reveal-delay-3">
+                <div class="skill-cat-header">
+                  <span class="skill-cat-icon">[ 06 ]</span>
+                  <span class="skill-cat-name">Data &amp; AI</span>
+                </div>
+                <div class="skill-tags">
+                  <span class="tag">Pandas</span>
+                  <span class="tag">NumPy</span>
+                  <span class="tag">Scikit-learn</span>
+                  <span class="tag">Tableau</span>
+                  <span class="tag">Power BI</span>
+                  <span class="tag">Matplotlib</span>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
+      </section>
     </div>
-  </section>
 
-  <!-- Projects -->
-  <section id="projects">
-    <div class="section-label reveal">
-      <span class="num">03</span>
-      <span class="title">Projects</span>
-    </div>
-    <div class="cs-outer">
-      <div class="cs-stage" id="csStage"></div>
-      <div class="cs-controls">
-        <button class="cs-arrow" id="csPrev">&#8592;</button>
-        <div class="cs-dots" id="csDots"></div>
-        <button class="cs-arrow" id="csNext">&#8594;</button>
-      </div>
-    </div>
-  </section>
-
-  <!-- Contact -->
-  <section id="contact">
-    <div class="section-label reveal">
-      <span class="num">04</span>
-      <span class="title">Contact</span>
-    </div>
-    <div class="contact-grid">
-      <div class="reveal">
-        <h2 class="contact-heading">
-          Let's<br>
-          <span class="outline">Connect</span>
-        </h2>
-        <p class="contact-sub">Have a project idea, an internship role, or just want to talk tech? I'm all ears.</p>
-        <a href="mailto:antosnowin07@gmail.com" class="contact-email-btn">
-          antosnowin07@gmail.com&thinsp;&#8599;
-        </a>
-      </div>
-      <div class="reveal reveal-delay-2">
-        <div class="scard-wrap">
-          <div class="scard-stack" id="scardStack">
-            <span class="scard-hint">[ expand ]</span>
-            <button class="scard-toggle" id="scardToggle">[ collapse ]</button>
+    <!-- ═══ SECTION 4: PROJECTS ═══ -->
+    <div class="page-section-wrapper" id="projectsScrollWrapper">
+      <section class="page-section projects-section" id="projects">
+        <div class="section-inner">
+          <div class="section-label reveal">
+            <span class="num">03</span>
+            <span class="title">Projects</span>
+          </div>
+          <div class="cs-outer">
+            <div class="cs-stage" id="csStage"></div>
+            <div class="cs-controls">
+              <button class="cs-arrow" id="csPrev">&#8592;</button>
+              <div class="cs-dots" id="csDots"></div>
+              <button class="cs-arrow" id="csNext">&#8594;</button>
+            </div>
           </div>
         </div>
-      </div>
+      </section>
     </div>
-  </section>
 
-  <footer>
-    <span>© 2025 Anto Snowin</span>
-    <span>Designed &amp; built from scratch</span>
-  </footer>
+    <!-- ═══ SECTION 5: CONTACT ═══ -->
+    <div class="page-section-wrapper" id="contactScrollWrapper">
+      <section class="page-section contact-section" id="contact">
+        <div class="section-inner">
+          <div class="section-label reveal">
+            <span class="num">04</span>
+            <span class="title">Contact</span>
+          </div>
+          <div class="contact-grid">
+            <div class="reveal">
+              <h2 class="contact-heading">
+                Let's<br>
+                <span class="outline">Connect</span>
+              </h2>
+              <p class="contact-sub">Have a project idea, an internship role, or just want to talk tech? I'm all ears.</p>
+              <a href="mailto:antosnowin07@gmail.com" class="contact-email-btn">
+                antosnowin07@gmail.com&thinsp;&#8599;
+              </a>
+            </div>
+            <div class="reveal reveal-delay-2">
+              <div class="scard-wrap">
+                <div class="scard-stack" id="scardStack">
+                  <span class="scard-hint">[ expand ]</span>
+                  <button class="scard-toggle" id="scardToggle">[ collapse ]</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <footer>
+          <span>© 2025 Anto Snowin</span>
+          <span>Designed &amp; built from scratch</span>
+        </footer>
+      </section>
+    </div>
+
+  </main>
 
   <script src="script.js" defer></script>
 </body>
