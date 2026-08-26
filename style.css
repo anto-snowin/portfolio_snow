@@ -334,7 +334,7 @@ nav.nav-hidden {
 .page-section-wrapper {
   position: relative;
   width: 100%;
-  height: 180vh; /* Scroll track for shrinking card transition */
+  height: 140vh; /* Scroll track for shrinking card transition */
 }
 
 .page-section-wrapper:last-child {
@@ -355,29 +355,31 @@ nav.nav-hidden {
   will-change: transform, border-radius, opacity;
   transform-origin: center top;
   border: 1px solid var(--border-mid);
-  box-shadow: 0 -15px 50px rgba(0, 0, 0, 0.6);
+  box-shadow: 0 -8px 30px rgba(0, 0, 0, 0.3);
   background: var(--bg);
 }
 
 /* Custom visual theme per card panel */
 .hero-section {
-  background: linear-gradient(145deg, #0e1118 0%, #0a0c14 40%, #080a10 100%);
+  background:
+    linear-gradient(145deg, rgba(14, 17, 24, 0.55) 0%, rgba(10, 12, 20, 0.5) 40%, rgba(8, 10, 16, 0.6) 100%),
+    url('assets/hero-image.png') center center / cover no-repeat;
 }
 
 .about-section {
-  background: linear-gradient(145deg, #101320 0%, #0c0e18 100%);
+  background: linear-gradient(145deg, #141828 0%, #101320 100%);
 }
 
 .skills-section {
-  background: linear-gradient(145deg, #090b14 0%, #0e101d 100%);
+  background: linear-gradient(145deg, #0e1120 0%, #121628 100%);
 }
 
 .projects-section {
-  background: linear-gradient(145deg, #0c0e1a 0%, #080911 100%);
+  background: linear-gradient(145deg, #101424 0%, #0c0f1a 100%);
 }
 
 .contact-section {
-  background: linear-gradient(145deg, #0e101f 0%, #06070d 100%);
+  background: linear-gradient(145deg, #121628 0%, #0a0c16 100%);
   justify-content: space-between;
 }
 
@@ -404,7 +406,7 @@ nav.nav-hidden {
   width: 100%;
   height: 100%;
   z-index: 0;
-  opacity: 0.5;
+  opacity: 0.45;
 }
 
 .wave-layer {
@@ -429,17 +431,81 @@ nav.nav-hidden {
 }
 
 .wave-layer-3 path {
-  stroke: rgba(79, 173, 126, 0.06);
+  stroke: rgba(224, 82, 82, 0.08);
+}
+
+/* ── Hero Portrait Image Layer ── */
+.hero-portrait-wrapper {
+  display: none;
+}
+
+.hero-portrait-glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: clamp(360px, 48vw, 700px);
+  height: clamp(360px, 48vw, 700px);
+  background: radial-gradient(circle at 50% 38%, rgba(255, 30, 60, 0.24) 0%, rgba(200, 169, 110, 0.08) 42%, transparent 72%);
+  filter: blur(55px);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 1;
+  animation: heroGlowPulse 4s ease-in-out infinite alternate;
+}
+
+@keyframes heroGlowPulse {
+  0% {
+    opacity: 0.7;
+    transform: translate(-50%, -50%) scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1.05);
+  }
+}
+
+.hero-portrait-mesh {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  max-width: 1300px;
+}
+
+.hero-portrait-img {
+  width: auto;
+  height: auto;
+  max-width: clamp(360px, 60vw, 860px);
+  max-height: clamp(380px, 78vh, 760px);
+  object-fit: contain;
+  filter: drop-shadow(0 25px 50px rgba(0, 0, 0, 0.85)) contrast(1.06) brightness(1.02);
+  -webkit-mask-image: radial-gradient(ellipse 75% 85% at 50% 50%, rgba(0,0,0,1) 48%, rgba(0,0,0,0) 98%);
+  mask-image: radial-gradient(ellipse 75% 85% at 50% 50%, rgba(0,0,0,1) 48%, rgba(0,0,0,0) 98%);
+  will-change: transform, opacity;
+  transform: translateZ(0);
+}
+
+.hero-portrait-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  background: radial-gradient(ellipse 95% 85% at 50% 50%, transparent 45%, rgba(7, 8, 15, 0.45) 80%, rgba(7, 8, 15, 0.92) 100%);
+  pointer-events: none;
 }
 
 /* Gradient overlay on hero */
 .hero-gradient-overlay {
   position: absolute;
   inset: 0;
-  z-index: 1;
+  z-index: 3;
+  pointer-events: none;
   background:
-    radial-gradient(ellipse 80% 60% at 50% 0%, transparent 30%, rgba(7, 8, 15, 0.3) 100%),
-    linear-gradient(to bottom, rgba(7, 8, 15, 0.1) 0%, rgba(7, 8, 15, 0.05) 40%, rgba(7, 8, 15, 0.4) 75%, rgba(7, 8, 15, 0.7) 100%);
+    radial-gradient(ellipse 85% 65% at 50% 0%, transparent 35%, rgba(7, 8, 15, 0.35) 100%),
+    linear-gradient(to bottom, rgba(7, 8, 15, 0.15) 0%, rgba(7, 8, 15, 0.02) 40%, rgba(7, 8, 15, 0.4) 75%, rgba(7, 8, 15, 0.75) 100%);
 }
 
 /* ── Hero top text (name + subtitle) ── */
@@ -653,12 +719,12 @@ nav.nav-hidden {
 /* ── Reveal on scroll ── */
 .reveal {
   opacity: 0;
-  transform: translateY(28px);
-  transition: opacity 0.7s ease, transform 0.7s ease;
+  transform: translateY(24px);
+  transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
 .reveal.visible {
-  opacity: 1;
+  opacity: 1 !important;
   transform: translateY(0);
 }
 
@@ -1318,6 +1384,30 @@ body::after {
   .section-inner {
     padding: 5rem 1.5rem;
     height: auto;
+  }
+
+  .hero-portrait-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .hero-portrait-img {
+    max-width: 90vw;
+    max-height: 52vh;
+    transform: translateY(20px);
+    opacity: 0.72;
+  }
+
+  .hero-portrait-glow {
+    width: 280px;
+    height: 280px;
+    filter: blur(35px);
   }
 
   .hero-top-text { left: 1.5rem; top: 90px; }

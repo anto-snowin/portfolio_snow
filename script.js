@@ -23,33 +23,33 @@ window.addEventListener("load", () => {
     duration: 0.6,
     ease: "power4.inOut"
   })
-  .to(".loader-text", {
-    opacity: 0,
-    y: -20,
-    duration: 0.3,
-    ease: "power2.out"
-  }, "-=0.5")
-  .to(".loader-bar-track", {
-    opacity: 0,
-    duration: 0.2,
-    ease: "power2.out"
-  }, "-=0.4")
-  .to("#loader", {
-    opacity: 0,
-    duration: 0.4,
-    ease: "power2.out",
-    onStart: () => {
-      loader.style.pointerEvents = "none";
-    },
-    onComplete: () => {
-      loader.remove();
-      // Trigger hero entrance animations after loader
-      animateHeroEntrance();
-    }
-  });
+    .to(".loader-text", {
+      opacity: 0,
+      y: -20,
+      duration: 0.3,
+      ease: "power2.out"
+    }, "-=0.5")
+    .to(".loader-bar-track", {
+      opacity: 0,
+      duration: 0.2,
+      ease: "power2.out"
+    }, "-=0.4")
+    .to("#loader", {
+      opacity: 0,
+      duration: 0.4,
+      ease: "power2.out",
+      onStart: () => {
+        loader.style.pointerEvents = "none";
+      },
+      onComplete: () => {
+        loader.remove();
+        // Trigger hero entrance animations after loader
+        animateHeroEntrance();
+      }
+    });
 });
 
-// ══════════════════════════════════════
+// ═════════════════════════  ═════════════
 // SMOOTH SCROLL (LENIS)
 // ══════════════════════════════════════
 const lenis = new Lenis({
@@ -81,55 +81,69 @@ gsap.ticker.lagSmoothing(0);
 function animateHeroEntrance() {
   const heroTL = gsap.timeline();
 
-  // Name slides in
-  heroTL.from("#heroTopText", {
-    y: 60,
+  // Portrait and atmospheric glow entrance
+  heroTL.from("#heroPortraitWrapper", {
+    scale: 1.08,
+    y: 40,
     opacity: 0,
-    duration: 1,
+    duration: 1.6,
     ease: "power3.out"
   })
-  // Status badge
-  .from("#heroStatusBadge", {
-    y: -30,
-    opacity: 0,
-    duration: 0.8,
-    ease: "power3.out"
-  }, "-=0.6")
-  // Signature draw-on
-  .to(".signature-text", {
-    strokeDashoffset: 0,
-    duration: 2.5,
-    ease: "power2.inOut"
-  }, "-=0.8")
-  // Bottom meta
-  .from("#heroBottomMeta", {
-    y: 30,
-    opacity: 0,
-    duration: 0.8,
-    ease: "power3.out"
-  }, "-=2")
-  // Scroll indicator
-  .from("#heroScrollIndicator", {
-    opacity: 0,
-    y: 20,
-    duration: 0.6,
-    ease: "power3.out"
-  }, "-=1.5")
-  // Wave layers fade in
-  .from(".wave-layer", {
-    opacity: 0,
-    scale: 1.1,
-    duration: 1.5,
-    ease: "power2.out",
-    stagger: 0.2
-  }, "-=2.5");
+    .from(".hero-portrait-glow", {
+      scale: 0.5,
+      opacity: 0,
+      duration: 1.8,
+      ease: "power2.out"
+    }, "-=1.4")
+    // Name slides in
+    .from("#heroTopText", {
+      y: 60,
+      opacity: 0,
+      duration: 1,
+      ease: "power3.out"
+    }, "-=1.2")
+    // Status badge
+    .from("#heroStatusBadge", {
+      y: -30,
+      opacity: 0,
+      duration: 0.8,
+      ease: "power3.out"
+    }, "-=0.8")
+    // Signature draw-on
+    .to(".signature-text", {
+      strokeDashoffset: 0,
+      duration: 2.2,
+      ease: "power2.inOut"
+    }, "-=0.8")
+    // Bottom meta
+    .from("#heroBottomMeta", {
+      y: 30,
+      opacity: 0,
+      duration: 0.8,
+      ease: "power3.out"
+    }, "-=1.8")
+    // Scroll indicator
+    .from("#heroScrollIndicator", {
+      opacity: 0,
+      y: 20,
+      duration: 0.6,
+      ease: "power3.out"
+    }, "-=1.4")
+    // Wave layers fade in
+    .from(".wave-layer", {
+      opacity: 0,
+      scale: 1.1,
+      duration: 1.5,
+      ease: "power2.out",
+      stagger: 0.2
+    }, "-=2.2");
 
   // Show nav after hero entrance
   gsap.to("#mainNav", {
     opacity: 1,
     y: 0,
     duration: 0.6,
-    delay: 0.5,
+    delay: 0.3,
     ease: "power3.out"
   });
 }
@@ -138,81 +152,197 @@ function animateHeroEntrance() {
 gsap.set("#mainNav", { opacity: 0, y: -30 });
 
 // ══════════════════════════════════════
-// ALL SECTIONS CARD-SHRINK TRANSITION
-// (veishnu.me style card stacking effect for EVERY section)
+// HERO PORTRAIT 3D MOUSE PARALLAX
 // ══════════════════════════════════════
-(function initAllSectionTransitions() {
-  const wrappers = gsap.utils.toArray('.page-section-wrapper');
+(function initHeroParallax() {
+  const portrait = document.getElementById('heroPortraitImg');
+  const glow = document.querySelector('.hero-portrait-glow');
+  const hero = document.getElementById('heroSection');
+  if (!portrait || !hero) return;
 
-  wrappers.forEach((wrapper, index) => {
-    const section = wrapper.querySelector('.page-section');
-    if (!section) return;
+  let targetX = 0, targetY = 0;
+  let currX = 0, currY = 0;
 
-    // Apply shrink & stack effect to every section except the last
-    if (index < wrappers.length - 1) {
+  window.addEventListener('mousemove', (e) => {
+    const rect = hero.getBoundingClientRect();
+    if (rect.bottom < 0 || rect.top > window.innerHeight) return;
+    const xPct = (e.clientX / window.innerWidth - 0.5) * 2;
+    const yPct = (e.clientY / window.innerHeight - 0.5) * 2;
+    targetX = xPct * 22;
+    targetY = yPct * 15;
+  });
+
+  function updateParallax() {
+    currX += (targetX - currX) * 0.08;
+    currY += (targetY - currY) * 0.08;
+    portrait.style.transform = `translate3d(${currX}px, ${currY}px, 0) rotateY(${currX * 0.2}deg) rotateX(${-currY * 0.2}deg)`;
+    if (glow) {
+      glow.style.transform = `translate(calc(-50% + ${-currX * 0.6}px), calc(-50% + ${-currY * 0.6}px))`;
+    }
+    requestAnimationFrame(updateParallax);
+  }
+  updateParallax();
+})();
+
+// ══════════════════════════════════════
+// SMOOTH CARD STACK PAGE TRANSITIONS
+// (Full 3D physical movement & card depth across all pages)
+// ══════════════════════════════════════
+(function initPageTransitions() {
+  // Define all stacked sections in order
+  const SECTIONS = [
+    {
+      wrapper: '#heroScrollWrapper',
+      section: '#heroSection',
+      fades: ['#heroTopText', '#heroStatusBadge', '.hero-signature', '#heroBottomMeta', '#heroScrollIndicator', '#heroPortraitWrapper']
+    },
+    {
+      wrapper: '#aboutScrollWrapper',
+      section: '#about',
+      fades: ['.about-bio', '.about-details']
+    },
+    {
+      wrapper: '#skillsScrollWrapper',
+      section: '#skills',
+      fades: ['.orbit-container', '.skill-cards']
+    },
+    {
+      wrapper: '#projectsScrollWrapper',
+      section: '#projects',
+      fades: ['.cs-stage', '.cs-controls']
+    },
+    {
+      wrapper: '#contactScrollWrapper',
+      section: '#contact',
+      fades: []
+    }
+  ];
+
+  // Apply smooth shrinking & stacking physics to each section card except the final one
+  SECTIONS.forEach((item, index) => {
+    const wrapper = document.querySelector(item.wrapper);
+    const section = document.querySelector(item.section);
+    if (!wrapper || !section) return;
+
+    // Skip shrinking the last section (Contact is base footer)
+    if (index < SECTIONS.length - 1) {
+      // 1. Physical card shrink, elevation & upward parallax movement
       gsap.to(section, {
-        scale: 0.88,
-        borderRadius: "28px",
-        opacity: 0.35,
+        scale: 0.96,
+        yPercent: -3,
+        borderRadius: "20px",
+        filter: "brightness(0.92)",
+        opacity: 0.88,
+        ease: "none",
         scrollTrigger: {
           trigger: wrapper,
-          start: "top top",
+          start: "55% top",
           end: "bottom top",
           scrub: 0.5,
           pin: false,
+          invalidateOnRefresh: true
         }
       });
 
-      // Fade out inner elements slightly as card shrinks
-      const innerContent = section.querySelectorAll('.section-inner, #heroTopText, #heroStatusBadge, .hero-signature, #heroBottomMeta, #heroScrollIndicator');
-      if (innerContent.length) {
-        gsap.to(innerContent, {
-          y: -40,
-          opacity: 0,
-          scrollTrigger: {
-            trigger: wrapper,
-            start: "15% top",
-            end: "75% top",
-            scrub: 0.3,
+      // 2. Parallax drift of content elements inside card (NO opacity fade — let CSS .reveal handle visibility)
+      if (item.fades && item.fades.length > 0) {
+        item.fades.forEach(selector => {
+          const el = section.querySelector(selector);
+          if (el) {
+            gsap.to(el, {
+              y: -30,
+              ease: "none",
+              scrollTrigger: {
+                trigger: wrapper,
+                start: "60% top",
+                end: "90% top",
+                scrub: 0.4,
+                invalidateOnRefresh: true
+              }
+            });
           }
         });
       }
     }
+
+    // 3. Smooth upward emergence & reveal for incoming sections (About, Skills, Projects, Contact)
+    if (index > 0) {
+      const inner = section.querySelector('.section-inner');
+      if (inner) {
+        gsap.fromTo(inner, 
+          { y: 30, opacity: 0.9 },
+          {
+            y: 0,
+            opacity: 1,
+            ease: "power2.out",
+            scrollTrigger: {
+              trigger: wrapper,
+              start: "top 100%",
+              end: "top 55%",
+              scrub: 0.4,
+              invalidateOnRefresh: true
+            }
+          }
+        );
+      }
+    }
   });
 
-  // Parallax wave layers in hero section
-  const heroWrapper = document.getElementById('heroScrollWrapper');
-  if (heroWrapper) {
-    gsap.to(".wave-layer-1", {
-      y: -60,
-      scrollTrigger: {
-        trigger: heroWrapper,
-        start: "top top",
-        end: "bottom top",
-        scrub: 0.5,
-      }
-    });
+  // Hero specific background wave layer parallax
+  gsap.to(".wave-layer-1", {
+    y: -70,
+    scrollTrigger: {
+      trigger: "#heroScrollWrapper",
+      start: "top top",
+      end: "bottom top",
+      scrub: 0.5,
+    }
+  });
 
-    gsap.to(".wave-layer-2", {
-      y: -100,
-      scrollTrigger: {
-        trigger: heroWrapper,
-        start: "top top",
-        end: "bottom top",
-        scrub: 0.5,
-      }
-    });
+  gsap.to(".wave-layer-2", {
+    y: -110,
+    scrollTrigger: {
+      trigger: "#heroScrollWrapper",
+      start: "top top",
+      end: "bottom top",
+      scrub: 0.5,
+    }
+  });
 
-    gsap.to(".wave-layer-3", {
-      y: -140,
-      scrollTrigger: {
-        trigger: heroWrapper,
-        start: "top top",
-        end: "bottom top",
-        scrub: 0.5,
+  gsap.to(".wave-layer-3", {
+    y: -150,
+    scrollTrigger: {
+      trigger: "#heroScrollWrapper",
+      start: "top top",
+      end: "bottom top",
+      scrub: 0.5,
+    }
+  });
+})();
+
+// ══════════════════════════════════════
+// SMOOTH NAVIGATION LINK TRANSITIONS
+// ══════════════════════════════════════
+(function initNavTransitions() {
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', (e) => {
+      const href = anchor.getAttribute('href');
+      if (!href || href === '#') return;
+      const target = document.querySelector(href);
+      if (target) {
+        e.preventDefault();
+        lenis.scrollTo(target, {
+          offset: 0,
+          duration: 1.4,
+          easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+          lock: false
+        });
+        if (typeof closeMobileNav === 'function') {
+          closeMobileNav();
+        }
       }
     });
-  }
+  });
 })();
 
 // ══════════════════════════════════════
@@ -257,31 +387,30 @@ window.addEventListener('scroll', () => {
 
   links.forEach(a => {
     a.addEventListener('mouseenter', () => movePill(a.parentElement));
-    a.addEventListener('click', (e) => {
-      e.preventDefault();
-      const targetId = a.getAttribute('href');
-      const targetEl = document.querySelector(targetId);
-      if (targetEl) {
-        lenis.scrollTo(targetEl, { duration: 1.2 });
-      }
-    });
   });
 
   track.addEventListener('mouseleave', () => {
     cursor.style.opacity = '0';
   });
 
-  // Highlight active section link on scroll
-  const sectionIds = ['aboutScrollWrapper', 'skillsScrollWrapper', 'projectsScrollWrapper', 'contactScrollWrapper'];
+  // highlight active section link on scroll
+  const sections = [
+    { id: 'aboutScrollWrapper', href: '#aboutScrollWrapper' },
+    { id: 'skillsScrollWrapper', href: '#skillsScrollWrapper' },
+    { id: 'projectsScrollWrapper', href: '#projectsScrollWrapper' },
+    { id: 'contactScrollWrapper', href: '#contactScrollWrapper' }
+  ];
   window.addEventListener('scroll', () => {
-    let current = '';
-    sectionIds.forEach(id => {
-      const el = document.getElementById(id);
-      if (el && window.scrollY >= el.offsetTop - 300) current = id;
+    let currentHref = '';
+    sections.forEach(sec => {
+      const el = document.getElementById(sec.id);
+      if (el && window.scrollY >= el.offsetTop - window.innerHeight * 0.4) {
+        currentHref = sec.href;
+      }
     });
     links.forEach(a => {
-      a.style.color = a.getAttribute('href') === '#' + current
-        ? 'var(--accent)' : '';
+      const isActive = a.getAttribute('href') === currentHref;
+      a.style.color = isActive ? 'var(--accent)' : '';
     });
   }, { passive: true });
 })();
@@ -308,7 +437,7 @@ const revealIO = new IntersectionObserver(entries => {
   entries.forEach(e => {
     if (e.isIntersecting) { e.target.classList.add('visible'); revealIO.unobserve(e.target); }
   });
-}, { threshold: 0.12 });
+}, { threshold: 0.05, rootMargin: '0px 0px -5% 0px' });
 revealEls.forEach(el => revealIO.observe(el));
 
 // ══════════════════════════════════════
@@ -676,7 +805,7 @@ revealEls.forEach(el => revealIO.observe(el));
       });
     }, { threshold: 0.12 });
 
-    entryIO.observe(document.getElementById('projectsScrollWrapper') || document.getElementById('projects'));
+    entryIO.observe(document.getElementById('projects'));
   })();
 })();
 
